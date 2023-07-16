@@ -6,7 +6,7 @@ import { FcLike } from "react-icons/fc";
 import "./Meals.scss";
 
 const Meals = () => {
-  const { loading, meals } = useAppContext();
+  const { loading, meals, selectMeal } = useAppContext();
 
   return (
     <section className="meals-section">
@@ -21,7 +21,7 @@ const Meals = () => {
           return (
             <article key={idMeal} className="meal">
               <div className="img-wrapper">
-                <img src={strMealThumb} className="meal-img" alt="" />
+                <img src={strMealThumb} className="meal-img" alt="" onClick={()=> selectMeal(idMeal)} />
               </div>
               <footer className="meal-footer">
                 <h5 className="meal-title">{strMeal}</h5>

@@ -8,14 +8,19 @@ const Search = () => {
   const { setSearchMeal, getRandomMeals } = useAppContext();
 
   const handleChange = (event) => {
-    setText(event.target.value);
+    setText(event.target.value)
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setSearchMeal(text);
-    setText('')
+    event.preventDefault()
+    setSearchMeal(text)
   };
+
+  const handleRandomMeal = () => {
+    setText("");
+    setSearchMeal("")
+    getRandomMeals()
+  }
 
   return (
     <header className="header">
@@ -31,7 +36,7 @@ const Search = () => {
           <button type="submit" className="btn header-btn">
             Search
           </button>
-          <button type="submit" className="btn header-btn-meal" onClick={getRandomMeals}>
+          <button type="submit" className="btn header-btn-meal" onClick={handleRandomMeal}>
             Suprise me
           </button>
         </div>

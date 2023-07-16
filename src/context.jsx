@@ -8,7 +8,9 @@ const RANDOM_MEAL_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 const AppProvider = ({ children }) => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchMeal, setSearchMeal] = useState('');
+  const [searchMeal, setSearchMeal] = useState("");
+  const [modal, setModal] = useState(false);
+  const [selectedMeal, setSelectedMeal] = useState(null);
 
   const getMeals = async (url) => {
     try {
@@ -28,6 +30,18 @@ const AppProvider = ({ children }) => {
 
   const getRandomMeals = () => {
     getMeals(RANDOM_MEAL_URL);
+  };
+
+  const selectMeal = (mealId, favouriteMeal) => {
+    let meal;
+    meal = meals.find((meal) => meal.idMeal === mealId);
+
+    setSelectedMeal(meal);
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
   }
 
   useEffect(() => {
@@ -35,7 +49,18 @@ const AppProvider = ({ children }) => {
   }, [searchMeal]);
 
   return (
-    <AppContext.Provider value={{ loading, meals, setSearchMeal, getRandomMeals }}>
+    <AppContext.Provider
+      value={{
+        loading,
+        meals,
+        setSearchMeal,
+        getRandomMeals,
+        modal,
+        selectMeal,
+        selectedMeal,
+        closeModal
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

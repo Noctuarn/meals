@@ -28,11 +28,13 @@
 
   @media (max-width:500px){
     max-width: 250px;
+    height: 490px;
   }
 
   &-img {   
     transition: transform .7s ease;
     height: 100%;
+    cursor: pointer;
 
     @media (min-width: 768px){
         &:hover{
