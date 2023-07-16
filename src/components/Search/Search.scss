@@ -1,0 +1,61 @@
+.header {
+  padding: 30px 40px;
+  width: 100%;
+  background-color: #001822;
+
+  &-input {
+    padding: 5px 10px;
+    border-radius: 15px;
+    width: 250px;
+    border: none;
+    font-weight: 700;
+  }
+
+  &-buttons{
+    display: flex;
+    gap: 15px;
+  }
+
+  &-btn,
+  &-btn-meal {
+    border: none;
+    border-radius: 15px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s;
+  }
+
+  &-btn {
+    background-color: blue;
+    padding: 10px 25px;
+
+    @media (min-width: 768px){
+        &:hover{
+            background-color: darkblue;
+        }
+    }
+  }
+
+  &-btn-meal {
+    background-color: lightblue;
+    padding: 10px 30px;
+ 
+
+    @media (min-width: 768px){
+        &:hover{
+            background-color: gold;
+        }
+    }
+  }
+}
+
+.form {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+
+  @media (max-width:670px){
+    flex-direction: column;
+  }
+}

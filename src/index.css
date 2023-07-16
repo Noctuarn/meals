@@ -6,9 +6,14 @@
   box-sizing: border-box;
   font-family: "Poppins";
   font-weight: 400;
+  outline: none;
 }
 
 body{
   background-color: rgba(219, 247, 247, 0.981);
 }
 
+.btn{
+  width: fit-content;
+  cursor: pointer;
+}

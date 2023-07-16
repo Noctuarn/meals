@@ -1,7 +1,7 @@
 import React from "react";
 import useAppContext from "../../hooks/useAppContext";
 
-import { FcLike } from 'react-icons/fc';
+import { FcLike } from "react-icons/fc";
 
 import "./Meals.scss";
 
@@ -11,7 +11,9 @@ const Meals = () => {
   return (
     <section className="meals-section">
       {loading ? (
-        <h1>Loading...</h1>
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
       ) : (
         meals.map((meal) => {
           const { idMeal, strMeal, strMealThumb } = meal;
@@ -23,7 +25,9 @@ const Meals = () => {
               </div>
               <footer className="meal-footer">
                 <h5 className="meal-title">{strMeal}</h5>
-                <button className="like-btn"><FcLike /></button>
+                <button className="like-btn">
+                  <FcLike />
+                </button>
               </footer>
             </article>
           );
