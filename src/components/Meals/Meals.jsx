@@ -1,12 +1,25 @@
-import React from "react";
+import React, {useCallback, useEffect} from "react";
 import useAppContext from "../../hooks/useAppContext";
 
+
 import { FcLike } from "react-icons/fc";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 import "./Meals.scss";
 
 const Meals = () => {
-  const { loading, meals, selectMeal } = useAppContext();
+  const {
+    loading,
+    meals,
+    favourite,
+    selectMeal,
+    addToFavourite,
+    removeFavourite,
+  } = useAppContext();
+
+  const isMealInFavourite = useCallback((mealId) => {
+    return favourite.some((meal) => meal.idMeal === mealId);
+  }, [favourite]);
 
   return (
     <section className="meals-section">
@@ -17,16 +30,27 @@ const Meals = () => {
       ) : (
         meals.map((meal) => {
           const { idMeal, strMeal, strMealThumb } = meal;
+          const isFavourite = isMealInFavourite(idMeal);
 
           return (
             <article key={idMeal} className="meal">
               <div className="img-wrapper">
-                <img src={strMealThumb} className="meal-img" alt="" onClick={()=> selectMeal(idMeal)} />
+                <img
+                  src={strMealThumb}
+                  className="meal-img"
+                  alt=""
+                  onClick={() => selectMeal(idMeal)}
+                />
               </div>
               <footer className="meal-footer">
                 <h5 className="meal-title">{strMeal}</h5>
-                <button className="like-btn">
-                  <FcLike />
+                <button
+                  className="like-btn"
+                  onClick={() =>
+                    isFavourite ? removeFavourite(idMeal) : addToFavourite(idMeal)
+                  }
+                >
+                  {isFavourite ? <FcLike/> : <FcLikePlaceholder/>}
                 </button>
               </footer>
             </article>

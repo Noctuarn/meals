@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
   const [searchMeal, setSearchMeal] = useState("");
   const [modal, setModal] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
+  const [favourite, setFavourite] = useState([]);
 
   const getMeals = async (url) => {
     try {
@@ -32,9 +33,13 @@ const AppProvider = ({ children }) => {
     getMeals(RANDOM_MEAL_URL);
   };
 
-  const selectMeal = (mealId, favouriteMeal) => {
+  const selectMeal = (mealId, favouriteMeal = false) => { 
     let meal;
-    meal = meals.find((meal) => meal.idMeal === mealId);
+    if(favouriteMeal) {
+      meal = favourite.find((meal) => meal.idMeal === mealId);
+    } else {
+      meal = meals.find((meal) => meal.idMeal === mealId);
+    }
 
     setSelectedMeal(meal);
     setModal(true);
@@ -42,6 +47,19 @@ const AppProvider = ({ children }) => {
 
   const closeModal = () => {
     setModal(false);
+  };
+
+  const addToFavourite = (mealId) => {
+    let meal;
+    meal = meals.find((meal) => meal.idMeal === mealId);
+
+    let favouriteMeals = [...favourite, meal];
+    setFavourite(favouriteMeals);
+  };
+
+  const removeFavourite = (mealId) => {
+    const updateMeals = favourite.filter(meal => meal.idMeal !== mealId);
+    setFavourite(updateMeals);
   }
 
   useEffect(() => {
@@ -58,7 +76,10 @@ const AppProvider = ({ children }) => {
         modal,
         selectMeal,
         selectedMeal,
-        closeModal
+        closeModal,
+        favourite,
+        addToFavourite,
+        removeFavourite
       }}
     >
       {children}

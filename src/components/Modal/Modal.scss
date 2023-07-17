@@ -9,12 +9,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, .7);       
+    background-color: rgba(0, 0, 0, .8);       
 
     &-container{
         background-color: white;
         border-radius: 7px;
         width: 60%;
+        min-width: 500px;
         height: 85%;
         padding-bottom: 40px;
         overflow: auto;
@@ -28,7 +29,7 @@
 
     &-image{
         width: 100%;
-        transform: translateY(-100px);
+        transform: translateY(-200px);
     }
 
     &-content{
@@ -43,6 +44,7 @@
         text-transform: uppercase;
         margin-bottom: 40px;
         font-weight: 700;
+        text-align: center;
     }
     
     &-subtitle{

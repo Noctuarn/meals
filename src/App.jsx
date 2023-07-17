@@ -5,6 +5,7 @@ import useAppContext from "./hooks/useAppContext";
 import Meals from "./components/Meals/Meals";
 import Search from "./components/Search/Search";
 import Modal from "./components/Modal/Modal";
+import Favourite from "./components/Favourite/Favourite";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="app">
       <Search/>
+      <Favourite/>
       <Meals />
       {modal && <Modal/>}
     </div>
