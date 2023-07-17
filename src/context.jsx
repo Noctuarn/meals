@@ -5,13 +5,19 @@ const AppContext = React.createContext();
 const ALL_MEALS_URL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 const RANDOM_MEAL_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
+
+const getFromLocalStorage = () => {
+  const favourites = localStorage.getItem("favourites");
+  return favourites ? JSON.parse(favourites) : [];
+};
+
 const AppProvider = ({ children }) => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchMeal, setSearchMeal] = useState("");
   const [modal, setModal] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
-  const [favourite, setFavourite] = useState([]);
+  const [favourite, setFavourite] = useState(getFromLocalStorage());
 
   const getMeals = async (url) => {
     try {
@@ -53,13 +59,15 @@ const AppProvider = ({ children }) => {
     let meal;
     meal = meals.find((meal) => meal.idMeal === mealId);
 
-    let favouriteMeals = [...favourite, meal];
+    const favouriteMeals = [...favourite, meal];
     setFavourite(favouriteMeals);
+    localStorage.setItem("favourites", JSON.stringify(favouriteMeals));
   };
-
+  
   const removeFavourite = (mealId) => {
     const updateMeals = favourite.filter(meal => meal.idMeal !== mealId);
     setFavourite(updateMeals);
+    localStorage.setItem("favourites", JSON.stringify(updateMeals));
   }
 
   useEffect(() => {
